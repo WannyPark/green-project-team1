@@ -46,6 +46,8 @@ const Login = () => {
         if (data) {
             setInputAddressValue(data.address || '');
             setInputZipCodeValue(data.zonecode || '');
+            $(".adr1").val(data.zonecode);
+            $(".adr2").val(data.address);
         }
     };
     const handleIdChange = (e) => setMemberId(e.target.value);
@@ -100,16 +102,17 @@ function adress() {
                     <input type="radio" name="chk_gender" value="남자" />남자
                     <input type="radio" name="chk_gender" value="여자" />여자
                     <div className="adress_text">
-                        *주소<Input type="text" id="memberAdress"/>
-                    </div>
-                    <div>
+                        *주소<br></br>
+                        <Input type="text" className="adr1" id="memberAdr1" placeholder="우편번호"/><br></br>
+                        
                         <DaumPostcode
                         style={postCodeStyle}
                         onComplete={onCompletePost}
                         ></DaumPostcode>
-                    </div>
-                    <div>
-                        <Button onClick={handleAdressSearch}>우편번호 찾기</Button>
+                        <Button onClick={handleAdressSearch}>우편번호 찾기</Button><br></br>
+                        
+                        <Input type="text" className="adr2" id="memberAdr2" placeholder="주소"/><br></br>
+                        <Input type="text" className="adr3" id="memberAdr3" placeholder="상세 주소"/>
                     </div>
                     {/* <div>
                         <Button className={`accordion-button ${collapseOpen ? '' : 'collapsed'}`} type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded={collapseOpen ? 'true' : 'false'} aria-controls="flush-collapseOne" onClick={handleToggle}>
