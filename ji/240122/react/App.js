@@ -9,6 +9,20 @@ function App() {
   const [mem, setMem] = useState([]);
   const [qMem, setQMem] = useState([]);
 
+
+  const reqMem = async () => {
+    const res = await (await axios.get("/api/reqMem", {
+      params:{
+        seq:1,
+      },
+      paramsSerializer: params => {
+        return qs.stringify(params, {arrayFormat:'brackets'})
+      }
+    }
+    )).data;
+    console.log(res);
+    setQMem(res);
+  }
   // useEffect(() => {
   //   axios.get("/api")
   //     .then((response) => {
@@ -27,19 +41,7 @@ function App() {
     setMem(res);
   }
 
-  const reqMem = async () => {
-    const res = await (await axios.get("/api/reqMem", {
-      params:{
-        seq:1,
-      },
-      paramsSerializer: params => {
-        return qs.stringify(params, {arrayFormat:'brackets'})
-      }
-    }
-    )).data;
-    console.log(res);
-    setQMem(res);
-  }
+  c
 
   useEffect(() => {
     getList();
