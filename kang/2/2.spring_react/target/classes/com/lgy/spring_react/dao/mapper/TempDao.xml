@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.lgy.spring_react.dao.TempDao">
+	
+	<select id="list"  resultType="com.lgy.spring_react.dto.TempDto">
+		SELECT idNum,id,mem_pwd,mem_grade,mem_birthday,mem_name,mem_email,mem_add FROM MEMBER_GREEN WHERE idNum=1
+	</select>
+	
+	<select id="getUserPw" parameterType="String" resultType="String">
+		SELECT mem_pwd FROM MEMBER_GREEN WHERE id=#{value}
+	</select>
+	<delete id="UserDelete" parameterType="String">
+   		DELETE FROM MEMBER_GREEN WHERE id=#{value}
+	</delete>
+	
+</mapper>

@@ -1,0 +1,91 @@
+.App {
+  text-align: center;
+
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+/* 추가된 스타일 */
+/* 컨테이너 스타일 */
+/* .container {
+  border: 1px solid black;
+  border-radius: 10px;
+  padding-bottom: 50px;
+  font-size: large;
+  text-align: center;
+  margin-left: auto;
+  max-width: 700px;
+  width: 80%;
+  background-color: rgb(243, 243, 243);
+} */
+.col-lg-4{
+  width: 80%;
+  height: 100%;
+  margin: auto;
+
+}
+/* 버튼 hover 및 색상 */
+.btn-gray {
+  background-color: gray;
+  border-color: gray;
+}
+
+.btn-gray:hover {
+  background-color: darkgray;
+  border-color: darkgray;
+}
+/* 비밀번호 일치 나 불일치 관련 */
+.password-check {
+  /* 일치할 때의 색상 (녹색) */
+  color: green;
+}
+
+.password-check.red {
+  /* 불일치할 때의 색상 (빨강) */
+  color: red;
+}
+button{
+  margin-top: 10px;
+}
+ .uphome {
+  text-decoration: none;
+  color:white;
+}
+input{
+  margin-top: 10px;
+}
+
+
+
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
