@@ -1,5 +1,5 @@
 // src/App.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
 import './App.css';
 
@@ -36,7 +36,7 @@ const Content = () => {
       </div>
       <div className="content-right">
         <Routes>
-          <Route path="/board" element={<Board />} />
+          <Route path="/board" element={<RightContent />} />
         </Routes>
       </div>
     </div>
@@ -44,49 +44,184 @@ const Content = () => {
 };
 
 const HomeContent = () => {
+  const [isWriteMode, setIsWriteMode] = useState(false);
+  const [nickname, setNickname] = useState('');
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+  const [image, setImage] = useState(null);
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // 서버에서 게시물 데이터를 가져오는 로직
+        const response = await fetch('서버의_API_엔드포인트');
+        const data = await response.json();
+        setPosts(data); // 서버에서 받아온 데이터로 설정
+      } catch (error) {
+        console.error('게시물 데이터를 가져오는데 실패했습니다:', error.message);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const handleWriteButtonClick = () => {
+    setIsWriteMode(!isWriteMode);
+  };
+
+  const handleWriteSubmit = async () => {
+    try {
+      // 서버에 글쓰기 데이터를 전송하는 로직
+      const response = await fetch('서버의_API_엔드포인트', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          nickname,
+          title,
+          content,
+          // 다른 필요한 데이터도 추가해주세요.
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('글쓰기에 실패했습니다.');
+      }
+
+      // 서버에서 반환한 데이터를 받아올 수 있다면 받아와서 UI 업데이트
+      // const responseData = await response.json();
+
+      setIsWriteMode(false);
+      // UI 업데이트 등 필요한 작업 수행
+    } catch (error) {
+      console.error('글쓰기에 실패했습니다:', error.message);
+    }
+  };
+
   return (
     <div className="board">
-      <div className="board-item">
-        <h3>게시물 1</h3>
-        <p>내용 1</p>
-      </div>
-      <div className="board-item">
-        <h3>게시물 2</h3>
-        <p>내용 2</p>
-      </div>
+      {posts.length === 0 ? (
+        <p>게시물이 없습니다.</p>
+      ) : (
+        posts.map((post) => (
+          <div key={post.id} className="board-item">
+            <h3>{post.title}</h3>
+          </div>
+        ))
+      )}
+
+      <button className="write-button" onClick={handleWriteButtonClick}>
+        글쓰기
+      </button>
+
+      {isWriteMode && (
+        <div className="write-form">
+          <input type="text" placeholder="닉네임" value={nickname} onChange={(e) => setNickname(e.target.value)} />
+          <input type="text" placeholder="제목" value={title} onChange={(e) => setTitle(e.target.value)} />
+          <textarea placeholder="내용" value={content} onChange={(e) => setContent(e.target.value)}></textarea>
+          <input type="file" accept="image/*" onChange={(e) => setImage(e.target.files[0])} />
+          {image && (
+            <div className="image-preview">
+              <img src={URL.createObjectURL(image)} alt="미리보기" />
+            </div>
+          )}
+          <button onClick={() => handleWriteSubmit()}>작성 완료</button>
+        </div>
+      )}
     </div>
   );
 };
 
-const Board = () => {
-  const generateBoardContent = () => {
-    const boardData = [
-      { id: 1, title: '게시물 1', content: '내용 1' },
-      { id: 2, title: '게시물 2', content: '내용 2' },
-    ];
+const RightContent = () => {
+  const [isWriteMode, setIsWriteMode] = useState(false);
+  const [nickname, setNickname] = useState('');
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+  const [image, setImage] = useState(null);
+  const [rightPosts, setRightPosts] = useState([]);
 
-    return boardData.map(item => (
-      <ClickableBoardItem key={item.id} title={item.title} content={item.content} />
-    ));
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // 서버에서 게시물 데이터를 가져오는 로직
+        const response = await fetch('서버의_API_엔드포인트');
+        const data = await response.json();
+        setRightPosts(data); // 서버에서 받아온 데이터로 설정
+      } catch (error) {
+        console.error('게시물 데이터를 가져오는데 실패했습니다:', error.message);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const handleWriteButtonClick = () => {
+    setIsWriteMode(!isWriteMode);
   };
 
-  return <div className="board">{generateBoardContent()}</div>;
-};
+  const handleWriteSubmit = async () => {
+    try {
+      // 서버에 글쓰기 데이터를 전송하는 로직
+      const response = await fetch('서버의_API_엔드포인트', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          nickname,
+          title,
+          content,
+          // 다른 필요한 데이터도 추가해주세요.
+        }),
+      });
 
-const ClickableBoardItem = ({ title, content }) => {
-  const [isClicked, setIsClicked] = useState(false);
+      if (!response.ok) {
+        throw new Error('글쓰기에 실패했습니다.');
+      }
 
-  const handleClick = () => {
-    setIsClicked(!isClicked);
+      // 서버에서 반환한 데이터를 받아올 수 있다면 받아와서 UI 업데이트
+      // const responseData = await response.json();
+
+      setIsWriteMode(false);
+      // UI 업데이트 등 필요한 작업 수행
+    } catch (error) {
+      console.error('글쓰기에 실패했습니다:', error.message);
+    }
   };
 
   return (
-    <div
-      className={`board-item ${isClicked ? 'clicked' : ''}`}
-      onClick={handleClick}
-    >
-      <h3>{title}</h3>
-      <p>{content}</p>
+    <div className="board">
+      {rightPosts.length === 0 ? (
+        <p>게시물이 없습니다.</p>
+      ) : (
+        rightPosts.map((post) => (
+          <div key={post.id} className="board-item">
+            <h3>{post.title}</h3>
+            <p>{post.content}</p>
+          </div>
+        ))
+      )}
+
+      <button className="write-button" onClick={handleWriteButtonClick}>
+        글쓰기
+      </button>
+
+      {isWriteMode && (
+        <div className="write-form">
+          <input type="text" placeholder="닉네임" value={nickname} onChange={(e) => setNickname(e.target.value)} />
+          <input type="text" placeholder="제목" value={title} onChange={(e) => setTitle(e.target.value)} />
+          <textarea placeholder="내용" value={content} onChange={(e) => setContent(e.target.value)}></textarea>
+          <input type="file" accept="image/*" onChange={(e) => setImage(e.target.files[0])} />
+          {image && (
+            <div className="image-preview">
+              <img src={URL.createObjectURL(image)} alt="미리보기" />
+            </div>
+          )}
+          <button onClick={() => handleWriteSubmit()}>작성 완료</button>
+        </div>
+      )}
     </div>
   );
 };
@@ -104,6 +239,17 @@ const App = () => {
 };
 
 export default App;
+
+
+
+
+
+
+
+
+
+
+
 
 
 
