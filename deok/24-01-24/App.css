@@ -95,7 +95,7 @@ body {
   transition: transform 80ms ease-in;
   font-family: 'UhBeeSe_hyun';
   text-shadow: -1px 0px white, 0px 1px white, 1px 0px white, 0px -1px white;
-  cursor: none;
+  /* cursor: none; */
 }
 
 .btn1:hover{
@@ -118,7 +118,7 @@ body {
   transition: transform 80ms ease-in;
   font-family: 'UhBeeSe_hyun';
   text-shadow: -1px 0px white, 0px 1px white, 1px 0px white, 0px -1px white;
-  cursor: none;
+  /* cursor: none; */
 }
 
 .btn2:hover{
@@ -133,11 +133,10 @@ body {
   padding: 0.8rem 0.8rem;
   width: 85%;
   margin: 0.5rem 0;
-  cursor: none;
+  /* cursor: none; */
 }
 
 .go-sign-up a {
   text-decoration: none;
   color: pink;
 }
-

@@ -1,6 +1,7 @@
 import './App.css';  // 해당 CSS 파일 import
 import React, { useState } from 'react';
 import $ from 'jquery'
+import Footer from './foot';
 
 function App() {
 
@@ -81,6 +82,7 @@ function App() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
