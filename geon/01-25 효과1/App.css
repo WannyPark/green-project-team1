@@ -1,0 +1,152 @@
+/* src/App.css */
+body {
+  background-color: #ffafaf; /* 연한 분홍색 배경 */
+  color: white; /* 글자색을 하얀색으로 설정 */
+}
+
+.header {
+  background-color: #ff5e5e; /* 분홍색 배경 */
+  color: white;
+}
+
+nav a {
+  color: white;
+  padding: 10px;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px; /* 전체 앱의 상단 여백 추가 */
+}
+
+.content {
+  display: flex;
+  width: 100%;
+  margin-top: 20px; /* 컨텐츠 영역 상단 여백 추가 */
+  border: 1px solid #ddd; /* 테두리 추가 */
+  border-radius: 8px; /* 테두리를 둥글게 만듦 */
+  overflow: hidden; /* 내용이 테두리를 벗어나지 않도록 함 */
+}
+
+.content-left {
+  flex: 4;
+  padding: 10px;
+  background-color: #ff7b7b; /* 연한 분홍색 배경 */
+}
+
+.content-right {
+  flex: 2;
+  padding: 10px;
+}
+
+.board-item {
+  position: relative;
+  width: 48%;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  background-color: #ff4d4d; /* 분홍색 배경 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, transform 0.3s; /* 트랜지션 효과 추가 */
+}
+
+.board-item:hover {
+  background-color: #ff6666; /* 진한 분홍색으로 변경 */
+  transform: scale(1.05); /* 호버 시 약간 확대 효과 */
+}
+
+.board-item:hover::before {
+  background-color: rgba(0, 0, 0, 0.8); /* 어두운 배경 색상으로 변경 */
+  color: white;
+  padding: 8px; /* 패딩 조정 */
+  font-size: 14px; /* 폰트 크기 조정 */
+}
+
+
+.write-form {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.3s, max-height 0.3s ease-in-out;
+}
+
+.write-form.visible {
+  opacity: 1;
+  max-height: 500px; /* 내용에 따라 적절한 높이로 조정 */
+}
+
+.cancel-button {
+  display: block;
+  margin: 10px 0;
+  background-color: #ff6666;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.cancel-button:hover {
+  background-color: #ff4d4d;
+}
+
+.write-button {
+  display: block;
+  margin: 10px 0;
+  background-color: #ff6666;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.write-button:hover {
+  background-color: #ff4d4d;
+}
+
+.write-button,
+.cancel-button,
+.write-form input,
+.write-form textarea,
+.write-form button {
+  display: block;
+  margin: 10px 0;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.write-button,
+.write-form button,
+.cancel-button {
+  background-color: #cc0000; /* 더 짙은 분홍색 */
+  color: white;
+}
+
+.cancel-button:hover,
+.write-form button:hover {
+  background-color: #aa0000; /* 더 어두운 분홍색 */
+}
+
+.write-form input,
+.write-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.write-form input[type="file"] {
+  padding: 10px 0;
+}
+
+
+
+
