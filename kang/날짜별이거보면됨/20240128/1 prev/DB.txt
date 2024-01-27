@@ -1,0 +1,20 @@
+CREATE TABLE BOARDD(
+boardNum VARCHAR2(5) PRIMARY KEY,
+boardTitle VARCHAR2(50),
+boardWriter VARCHAR2(50),
+boardDate VARCHAR2(50),
+boardHit VARCHAR2(5)
+);
+
+BOARDD 게시판
+
+DECLARE
+  counter NUMBER := 1;
+BEGIN
+  WHILE counter <= 100 LOOP
+    INSERT INTO BOARDD VALUES (counter, '제목' || counter, '글쓴이' || counter, counter || '11111', counter);
+    counter := counter + 1;
+  END LOOP;
+END;
+/
+게시글 100개 넣기
