@@ -1,0 +1,103 @@
+@font-face {
+  font-family: 'UhBeeSe_hyun';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_five@.2.0/UhBeeSe_hyun.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  font-size: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+  Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+body {
+  background-color: #FFF8ED;
+  font-family: 'UhBeeSe_hyun';
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.logo {
+  cursor: pointer;
+}
+
+.searchArea {
+  margin-top: 200px;
+}
+
+.Search{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  text-align: center;
+  margin: 0 auto;
+  margin-bottom: 50px;
+}
+
+.Search-input {
+  width: 500px;
+  height: 50px;
+  margin: 10px;
+  padding: 20px;
+  border-radius: 10px;
+  background: rgb(255, 255, 255);
+}
+
+.submit-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 50px;
+  font-size: 15px;
+  padding: 20px;
+  background: #fcefdc;
+  border-radius: 10px;
+}
+
+.aos {
+  display: flex;
+}
+
+.side{
+  margin-left: auto;
+  width: 20%;
+  height: 1000px;
+  background-color: #fcefdc;
+  text-align: center;
+}
+
+.select{
+  height: 40px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  outline: 0;
+  background: rgb(252, 216, 222);
+  padding: 4px;
+  border-radius: 8px;
+}
+
+.item{  
+  
+  width: 600px;
+  height: 200px;
+  background-color: rgb(252, 216, 222);
+  border: 1px solid;
+  margin: 50px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+
+}
+
+.aa{
+  display: flex;
+  flex-wrap: wrap;
+  width: 80%;
+  margin-left: 100px;
+}
