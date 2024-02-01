@@ -1,0 +1,94 @@
+.gh_content_box {
+    height: 90vh;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.gh_search_area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gh_search_input {
+    width: 500px;
+    height: 50px;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    background: rgb(255, 255, 255);
+}
+
+.gh_search_bt1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 50px;
+    font-size: 15px;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+}
+
+.gh_search_bt2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 50px;
+    font-size: 15px;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    border: none;
+}
+
+.gh_content_area {
+    display: flex;
+    margin: 40px;
+    height: 80%;
+}
+
+.gh_side_bar {
+    display: inline-block;
+    width: 15%;
+    height: 400px;
+    background-color: rgb(255, 227, 232);
+    position: fixed;
+    right: 40px;
+    border-radius: 15px;
+    padding: 20px;
+}
+
+.gh_res_area {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    justify-content: center;
+    align-items: center;
+    background-color: pink;
+    width: 82%;
+    height: 100%;
+    border-radius: 15px;
+    padding: 20px;
+}
+
+.gh_item_area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    overflow: auto;
+    margin-bottom: 10px;
+}
+
+.gh_res_item {
+    display: inline-block;
+    width: 500px;
+    height: 150px;
+    background-color: rgb(255, 227, 232);
+    margin: 20px;
+    border-radius: 15px;
+    padding: 20px;
+}
