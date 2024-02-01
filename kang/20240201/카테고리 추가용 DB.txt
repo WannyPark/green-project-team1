@@ -1,0 +1,30 @@
+DECLARE
+  counter NUMBER := 1;
+BEGIN
+  WHILE counter <= 500 LOOP
+    INSERT INTO BOARDD VALUES (
+      counter,
+      '제목' || counter,
+      '글쓴이' || counter,
+      TO_CHAR(counter || '11111'),
+      TO_CHAR(counter),
+      TO_CHAR(FLOOR(DBMS_RANDOM.VALUE(1, 4))) -- 랜덤으로 1, 2, 3 값 생성
+    );
+    counter := counter + 1;
+  END LOOP;
+END;
+/
+
+
+멤버넣기.
+
+CREATE TABLE BOARDD(
+boardNum VARCHAR2(5) PRIMARY KEY,
+boardTitle VARCHAR2(50),
+boardWriter VARCHAR2(50),
+boardDate VARCHAR2(50),
+boardHit VARCHAR2(5),
+cate VARCHAR2 (5)
+);
+테이블
+
