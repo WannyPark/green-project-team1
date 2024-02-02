@@ -44,7 +44,6 @@ function App() {
     e.preventDefault(); // 기본 이벤트 제거
   
     try {
-      const encodedDate = encodeURIComponent(formData.GAT_PLAN_DATE);
       const queryString = Object.entries(formData)
         .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
         .join('&');
