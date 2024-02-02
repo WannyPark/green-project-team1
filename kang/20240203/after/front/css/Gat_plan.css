@@ -1,0 +1,58 @@
+.gptable{
+    text-align: center;
+    background-color: rgb(252, 158, 174);
+     margin: 20px auto 10%;
+    margin-top: 15%;
+    border-radius: 10px;
+
+}
+.gpaddr{
+    background-color: beige;
+    width: 800px;
+    height: 60px;
+}
+.gpleader{
+    background-color: beige;
+    height: 50px;
+    border-right:dotted 5px pink;
+}
+.gpdate{
+    background-color: beige;
+    height: 80px;
+}
+.gptitle{
+    background-color: beige;
+    height: 80px;
+}
+.gpdesc{
+    background-color: beige;
+    height: 300px;
+}
+.gpplan{
+    background-color: mediumaquamarine;
+}
+.gpplan2{
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+.gpfull{
+    background-color: lightpink;
+    border-radius: 10px;
+    height: 800px;
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    background-position: center;
+    max-width: 1500px;
+    padding: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* 100% 뷰포트 높이를 기준으로 세로 중앙 정렬 */
+}
+.gpmove{
+    margin-top: 30px;
+    margin-left: 1000px;
+    margin-bottom: 50px;
+    font-size: 35px;
+}
