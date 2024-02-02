@@ -25,89 +25,89 @@ const Board_list_details = () => {
   const [qMem, setQMem] = useState([]);
 
   // post 방식
-    const reqMem = async () => {
-    //   const res = await (await axios.post("/api/reqMem", {
-    //     id: id
-    //   },
-    //   )).data;
-    //   console.log(res);
-    //   setQMem(res);
-    // }
-      try {
-        const response = await axios.post("/api/reqMem", {
-            id: id
-        });
-
-        console.log(response.data);
-        setQMem(response.data[0]);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-        alert("오류가 발생했습니다.");
-      }
+  const reqMem = async () => {
+  //   const res = await (await axios.post("/api/reqMem", {
+  //     id: id
+  //   },
+  //   )).data;
+  //   console.log(res);
+  //   setQMem(res);
+  // }
+    try {
+      const response = await axios.post("/api/reqMem", {
+          id: id
+      });
+      console.log(response.data);
+      setQMem(response.data[0]);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      alert("오류가 발생했습니다.");
     }
+  }
 
-    useEffect(() => {
+  useEffect(() => {
+    reqMem();
+  }, [id]); // id가 변경될 때마다 useEffect가 실행되도록 설정
+
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedTitle, setEditedTitle] = useState("");
+  const [editedContent, setEditedContent] = useState("");
+
+  //수정
+  const handleEditClick = () => {
+    $(".changeBtn").css("visibility", "visible");
+    setIsEditing(true);
+    setEditedTitle(qMem.title);
+    setEditedContent(qMem.content);
+  };
+  //(수정)저장
+  const handleSaveClick = async  () => {
+    const data = {
+      id:id,
+      title:$(".title_modify").val(),
+      content:$(".content_modify").val(),
+    }
+    try {
+      // 수정된 제목과 내용을 서버에 전송
+        await axios.post("/api/updateMem", data);
+      
+      // 성공적으로 저장되면 편집 모드를 비활성화하고 수정된 내용을 다시 불러옴
+      setIsEditing(false);
+      // setQMem({
+      //   title: $(".title_modify").val(),
+      //   content: $(".content_modify").val(),
+      // });
       reqMem();
-    }, [id]); // id가 변경될 때마다 useEffect가 실행되도록 설정
+      $(".changeBtn").css("visibility", "hidden");
+    } catch (error) {
+      console.error('Error updating data:', error);
+      alert('수정 중 오류가 발생했습니다.');
+    }
+  };
 
-    const [isEditing, setIsEditing] = useState(false);
-    const [editedTitle, setEditedTitle] = useState("");
-    const [editedContent, setEditedContent] = useState("");
-
-    //수정
-    const handleEditClick = () => {
-      $(".changeBtn").css("visibility", "visible");
-      setIsEditing(true);
-      setEditedTitle(qMem.title);
-      setEditedContent(qMem.content);
-    };
-    //(수정)저장
-    const handleSaveClick = async  () => {
-      const data = {
-        id:id,
-        title:$(".title_modify").val(),
-        content:$(".content_modify").val(),
-      }
-      try {
-        // 수정된 제목과 내용을 서버에 전송
-          await axios.post("/api/updateMem", data);
-        
-        // 성공적으로 저장되면 편집 모드를 비활성화하고 수정된 내용을 다시 불러옴
-        setIsEditing(false);
-        setQMem({
-          title: $(".title_modify").val(),
-          content: $(".content_modify").val(),
-        });
-        $(".changeBtn").css("visibility", "hidden");
-      } catch (error) {
-        console.error('Error updating data:', error);
-        alert('수정 중 오류가 발생했습니다.');
-      }
-    };
-
-    // 삭제 처리
-    const handleDeleteClick = async () => {
-      try {
-        // 서버에 삭제 요청을 보냄
-        await axios.delete("/api/deleteMem", {
-          data: {id}
-        });
+  // 삭제 처리
+  const handleDeleteClick = async () => {
+    try {
+      // 서버에 삭제 요청을 보냄
+      await axios.delete("/api/deleteMem", {
+        data: {id}
+      });
   
-        // 삭제가 성공하면 현재 보여지고 있는 내용을 지움
-        setQMem({
-          id: '',
-          date: '',
-          hit: 0,
-          title: '',
-          content: '',
-        });
-        window.location.href = "/board";
-        // history.push("/board");
-      } catch (error) {
-        console.error('Error deleting data:', error);
-        alert('삭제 중 오류가 발생했습니다.');
-      }
-    };
+      // 삭제가 성공하면 현재 보여지고 있는 내용을 지움
+      setQMem({
+        id: '',
+        date: '',
+        hit: 0,
+        title: '',
+        content: '',
+      });
+      window.location.href = "/board";
+      // history.push("/board");
+    } catch (error) {
+      console.error('Error deleting data:', error);
+      alert('삭제 중 오류가 발생했습니다.');
+    }
+  };
 
   return (
     // <div><Navi />
