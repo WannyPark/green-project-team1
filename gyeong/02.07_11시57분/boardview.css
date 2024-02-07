@@ -24,7 +24,7 @@
     /* margin-left: 50px; */
     height: 700px;
     width: 1000px;
-    border-radius: 15px 0 15px 15px;
+    border-radius: 15px;
     background-color: rgba(255, 192, 203);
     /* box-shadow: -0.2rem 0 0.7rem rgba(0, 0, 0, 0.25),
                                0 0.2rem 0.7rem rgba(0, 0, 0, 0.25),
@@ -166,6 +166,15 @@
     color: rgba(0, 0, 0);
     margin: 10px;
     visibility: hidden;
+}
+.changeBtn:hover{
+    background-color: rgba( 252, 158, 174, 0.5);
+    border-color: pink;
+    transition: background-color 0.3s ease;
+}
+.changeBtn:hover:active{
+    background-color: rgba( 252, 158, 174, 0.5);
+    border-color: pink;
 }
 .list{
     background-color: rgba( 252, 158, 174, 0.5);
