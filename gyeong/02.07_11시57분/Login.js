@@ -7,6 +7,7 @@ import axios from 'axios';
 import qs from 'qs';
 import Session from 'react-session-api';
 import AOS from "aos";
+import { Modal, Button, Form } from 'react-bootstrap'
 
 
 function App() {
@@ -16,10 +17,19 @@ function App() {
   const [id, setId] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [showModal, setShowModal] = useState(false); // showModal 상태 추가
+  const [userInputCode, setUserInputCode] = useState(''); // userInputCode 상태 추가
 
   useEffect(() => {
     AOS.init({ duration: 2000 });
-  });
+  },[]);
+
+  const handleClose = () => {
+    setShowModal(false);
+  };
+  const handleShow = () => {
+    setShowModal(true);
+  };
 
   const reqApiLogin = async () => {
     const res = await (await axios.post("/api/login", {
@@ -39,6 +49,7 @@ function App() {
     }
   }
 
+  const [response, setResponse] = useState(null);
   const sendEmail = async () => {
     console.log('sendEmail function is called!');
     try {
@@ -55,6 +66,8 @@ function App() {
 
       console.log(response.data.code); // 서버에서의 응답 확인
       console.log(response.data.res); // 서버에서의 응답 확인
+
+      setResponse(response);
       
       if (response.data.res === '0') {
         // 아이디가 존재하지 않는 경우
@@ -66,21 +79,34 @@ function App() {
       else {
         // 모두 일치하는 경우
         console.log('이메일이 발송되었습니다.');
-        const userInputCode = prompt('이메일로 받은 인증 코드를 입력하세요:');
-        if (userInputCode === response.data.code) {
-          // 검증 성공
-          console.log('인증 성공');
-          change_view3();
-        } else {
-          // 검증 실패
-          console.log('인증 실패');
-          alert('인증 코드가 올바르지 않습니다. 새로운 인증코드를 받아서 입력해주세요');
-        }
+        handleShow(); // 모달 열기
+        // const userInputCode = prompt('이메일로 받은 인증 코드를 입력하세요:');
+        // if (userInputCode === response.data.code) {
+        //   // 검증 성공
+        //   console.log('인증 성공');
+        //   change_view3();
+        // } else {
+        //   // 검증 실패
+        //   console.log('인증 실패');
+        //   alert('인증 코드가 올바르지 않습니다. 새로운 인증코드를 받아서 입력해주세요');
+        // }
       }
     } catch (error) {
       console.error('Error sending email:', error);
       // 서버 에러 또는 다른 이유로 이메일 발송이 실패한 경우
       alert('이메일 발송에 실패했습니다. 잠시 후 다시 시도해주세요.');
+    }
+  };
+
+  const handleVerification = () => {
+    // 인증 확인 로직
+    if (response && response.data && userInputCode === response.data.code) {
+      console.log('인증 성공');
+      change_view3();
+      handleClose(); // 모달 닫기
+    } else {
+      console.log('인증 실패');
+      alert('인증 코드가 올바르지 않습니다. 새로운 인증코드를 받아서 입력해주세요');
     }
   };
 
@@ -157,6 +183,8 @@ function App() {
     $(".find-pw").fadeOut(500, () => {
       $(".change-pw").fadeIn(1000);
     });
+
+    handleShow();
   }
 
   return (
@@ -230,6 +258,27 @@ function App() {
           </div>
         </div>
       </div>
+
+      {/* 모달 */}
+      <Modal show={showModal} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>이메일 인증</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>이메일로 받은 인증 코드를 입력하세요:</p>
+          <Form.Control
+            type='text'
+            value={userInputCode}
+            onChange={(e) => setUserInputCode(e.target.value)}
+          />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant='success' onClick={handleVerification}>
+            확인
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      
       <Foot />
     </div>
   );
